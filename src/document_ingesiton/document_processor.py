@@ -18,9 +18,7 @@ and stored inside the vector database.
 from pathlib import Path
 from typing import List, Union
 
-# from langchain.schema import Document
-# The modern, updated import path
-from langchain_core.documents import Document
+from langchain.schema import Document
 
 from langchain_community.document_loaders import (
     WebBaseLoader,
@@ -132,20 +130,10 @@ class DocumentProcessor:
         self,
         sources: List[Union[str, Path]],
     ) -> List[Document]:
-         """
-        Load documents from different sources.
 
-        Supported sources:
+        documents: List[Document] = []
 
-        • Website URL
-        • PDF file
-        • Folder of PDFs
-        • TXT file
-        """
-
-         documents: List[Document] = []
-
-         for source in sources:
+        for source in sources:
 
             # URL
             if isinstance(source, str) and source.startswith(
@@ -181,9 +169,8 @@ class DocumentProcessor:
                     f"Unsupported file type: {source}"
                 )
 
-            return documents
+        return documents
 
-    
     ###################################################################
     # Split Documents
     ###################################################################
